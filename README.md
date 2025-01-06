@@ -117,3 +117,4 @@ The submission will be evaluated based on:
 2. You are free to remove and write your own logic when implementing the api
 3. Make sure that the code is well tested
 
+# pricing-calc
