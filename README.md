@@ -1,7 +1,15 @@
 # Profitability Calculator
 
 ## Overview
-This is currently a front-end application that calculates various fees and profitability metrics for transactions. We aim to extend it into a full-stack solution with an API backend.
+This application fetches data from a google sheet which is deployed on sheetsDB. 
+
+## Working
+1. First we enter all the necessary fields in the form.
+2. When we press the "Calculate Fees" button, we hit an endpoint this : POST /api/v1/profitability-calculator
+3. On hitting this endpoint, we use the form data and collect information about different types of fee from the sheet that is deployed on sheetsDB.
+4. The backend is running on port 3000 locally.
+5. The frontend is running on port 5173 locally.
+6. The data is returned in JSON format which is used to populate the frontend of the application.
 
 ## Explanation of business terms:
 
@@ -35,86 +43,29 @@ These factors combine to determine your total Amazon fees and potential profits.
 - Interactive pricing calculator
 - Fee structure visualization
 - Detailed cost breakdown
-- Static fee calculations
+- Dynamic fee calculations
 
-## Proposed API Extension
-
-### Goals
-- Create a backend API to manage fee structures
-- Integration with the given spreadsheet data(See below)
-- Dynamic fee calculation(From the api)
-
-### Planned API Endpoints
+### API Endpoint
 ```http
 POST /api/v1/profitability-calculator
 ```
+Request example
+<img width="556" alt="Screenshot 2025-01-07 at 1 58 15 AM" src="https://github.com/user-attachments/assets/3f16d6ee-847c-40e1-8d85-84fbed4bba18" />
+
+Response example
+<img width="563" alt="Screenshot 2025-01-07 at 1 58 46 AM" src="https://github.com/user-attachments/assets/0108c23e-4443-4e39-a600-4136f3fcb87b" />
+
+Displayed on frontend
+<img width="1470" alt="Screenshot 2025-01-07 at 1 59 23 AM" src="https://github.com/user-attachments/assets/7706d83d-021c-4685-ab6e-bff4df8d7448" />
+
+### Goals achieved
+- Created a backend API to manage fee structures
+- Integration with the given spreadsheet data
+- Dynamic fee calculation (From the api)
 
 ## Extending the Project
-
-### Adding New Fee Structures
-
-1. Access the fee structure spreadsheet at: https://docs.google.com/spreadsheets/d/1o_yM63Grl_QB6lpuXE3spbrMeCs-hIMXCVyghj8FmV0/edit?usp=sharing
-
-2. Instead of using `data/fees.ts`, create an API that fetches the fee structure by using the data present in the spreadsheet.
-
-3. Update the `feeCalculators.ts` file to use the new API endpoint for fetching fee structures.
-
-4. Ensure that the new API endpoint is properly integrated into the project and tested for functionality.
-
-5. Update the documentation to reflect the new API endpoint and its usage.
-
-How to run
-
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Run development server: `npm run dev`
-
-## API Documentation
-
-### Calculate Profitability
-http
-POST /api/v1/profitability-calculator
-Content-Type: application/json
-
-Response:
-```
-json
-{
-"breakdown": {
-"referralFee": 10,
-"weightHandlingFee": 10.0,
-"closingFee": 5.0,
-"pickAndPackFee": 20
-},
-"totalFees": 45,
-"netEarnings": 200
-}
-```
-
-## Scoring Mechanism
-
-The submission will be evaluated based on:
-
-1. Code Quality:
-   - Code maintainability
-   - Performance benchmarks
-   - Error handling
-
-2. Fee Calculation Accuracy:
-   - Referral fee precision across product categories
-   - Weight handling fee accuracy for different shipping modes
-   - Closing fee calculations for various price ranges
-   - Pick & pack fee correctness for FBA/non-FBA modes
-
-3. Net Earnings Validation:
-   - Edge case handling
-   - Decimal precision handling
-   - Currency conversion accuracy (if applicable)
-
-
-## Note
-1. The Front end code and logic given here is just for explanatory purposes
-2. You are free to remove and write your own logic when implementing the api
-3. Make sure that the code is well tested
-
-# pricing-calc
+How to run:
+   1. Clone the repository
+   2. Install dependencies for both frontend and backend - `npm install`
+   3. Frontend - `npm run dev`
+   4. Backend - `node index.js`
